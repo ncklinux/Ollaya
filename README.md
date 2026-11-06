@@ -172,7 +172,7 @@ cd ollaya-web-ui
 npm install
 ```
 
-Add this small script tag inside <head> (right before other scripts).
+Add this small script tag inside `<head>` (right before other scripts). Even on the latest Firefox, `crypto.randomUUID()` is disabled on plain HTTP (insecure contexts like local LAN IP addresses).This polyfill falls back to `crypto.getRandomValues()` so the app can still generate UUIDs without crashing.
 
 ```bash
 cd ollaya-web-ui
