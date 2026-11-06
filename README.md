@@ -9,6 +9,7 @@ A hands-on tutorial for Ollaya showing how to run fast, local decision models fo
 </picture>
 <br />
 <br />
+
 [Ollaya](https://ollaya.dev) is an open source local runtime built specifically for **decision models**. Instead of waiting seconds for a generative LLM to output and parse JSON while burning expensive API tokens in the process, Ollaya evaluates an input state (such as an email, ticket, or JSON payload) and a typed question, then returns deterministic choices with calibrated probabilities in a single forward pass within milliseconds. Running entirely on your local machine (CPU or GPU), it ensures complete data privacy with no token fees. This makes it ideal for real time tasks like support ticket triage, agent guardrails, tool call validation, and high throughput query routing.
 
 ## Motivation
