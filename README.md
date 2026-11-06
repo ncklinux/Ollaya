@@ -136,6 +136,73 @@ sudo ufw enable
 
 Here `192.168.56.1` represents your host operating system IP address on the VirtualBox adapter, ensuring only your host computer can connect.
 
+## Running Ollaya & Ollaya Web UI on a Headless VM / Remote Host
+
+This section covers how to set up the Ollaya Web UI (on VM) and access the interface from host locally.
+
+Update system packages and install Node.js (LTS), npm, and git.
+
+```bash
+sudo apt update
+sudo apt install -y git nodejs npm
+node -v
+npm -v
+git --version
+sudo SYSTEMD_EDITOR=vim systemctl edit ollaya.service
+
+# Add the following lines
+[Service]
+Environment="OLLAYA_HOST=192.168.56.106:11435"
+Environment="OLLAYA_ORIGINS=*"
+
+# Reload systemd and restart the service
+sudo systemctl daemon-reload
+sudo systemctl restart ollaya
+
+# Allow incoming traffic
+sudo ufw allow 11435/tcp
+sudo ufw allow 5173/tcp
+```
+
+Clone and Install Dependencies, run these commands as a standard (non-root) user.
+
+```bash
+git clone https://github.com/ollaya-dev/ollaya-web-ui.git
+cd ollaya-web-ui
+npm install
+```
+
+Add this small script tag inside <head> (right before other scripts).
+
+```bash
+cd ollaya-web-ui
+vim index.html
+
+<script>
+  if (!window.crypto || !window.crypto.randomUUID) {
+    window.crypto = window.crypto || {};
+    window.crypto.randomUUID = function() {
+      return '10000000-1000-4000-8000-100000000000'.replace(/[018]/g, c =>
+        (c ^ crypto.getRandomValues(new Uint8Array(1))[0] & 15 >> c / 4).toString(16)
+      );
+    };
+  }
+</script>
+```
+
+Save, then Run Vite with host flag.
+
+```bash
+cd ollaya-web-ui
+npm run dev -- --host
+```
+
+Open your browser and navigate to `http://192.168.56.106:5173`. Click the Settings (gear :gear:) icon in the header, update the server URL from `http://127.0.0.1:11435` to `http://192.168.56.106:11435`, and save your changes. Setup is now complete!
+
+|                    Step 1                    |                    Step 2                    |                  Have fun!                   |
+| :------------------------------------------: | :------------------------------------------: | :------------------------------------------: |
+| ![Web UI](misc/screenshots/ollaya_ui_01.png) | ![Web UI](misc/screenshots/ollaya_ui_02.png) | ![Web UI](misc/screenshots/ollaya_ui_03.png) |
+
 ## License
 
 MIT - See the [LICENSE](https://github.com/ncklinux/Ollaya/blob/main/LICENSE) file in this project for details.
