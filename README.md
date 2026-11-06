@@ -18,7 +18,7 @@ When building automated workflows, I kept hitting the same wall. Using generativ
 
 ## Installation
 
-Install Ollaya with a single command as a normal user, no root login needed, though it will prompt for `sudo` once during installation to register the automatic background service.
+Install Ollaya with a single command. By default, it prompts for sudo to install to `/usr/local` and configure a background service, but it can also be installed completely without root permissions by setting `OLLAYA_INSTALL_DIR=$HOME/.local`.
 
 ```bash
 curl -fsSL https://ollaya.dev/install.sh | sh
