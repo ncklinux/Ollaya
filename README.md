@@ -143,6 +143,7 @@ This section covers how to set up the Ollaya Web UI (on VM) and access the inter
 Update system packages and install Node.js (LTS), npm, and git.
 
 ```bash
+# Necessary packages
 sudo apt update
 sudo apt install -y git nodejs npm
 node -v
