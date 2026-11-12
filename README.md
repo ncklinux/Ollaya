@@ -244,7 +244,7 @@ Routing Actions:
   • QUEUE -> Tier 2 Technical Support
 ```
 
-# Rust
+### Rust
 
 ```bash
 sudo apt update
