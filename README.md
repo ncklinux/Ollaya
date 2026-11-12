@@ -136,7 +136,7 @@ sudo ufw enable
 
 Here `192.168.56.1` represents your host operating system IP address on the VirtualBox adapter, ensuring only your host computer can connect.
 
-## Running Ollaya & Ollaya Web UI on a Headless VM / Remote Host
+## Ollaya Web UI
 
 This section covers how to set up the Ollaya Web UI (on VM) and access the interface from host locally.
 
@@ -205,6 +205,24 @@ Open your browser and navigate to `http://192.168.56.106:5173`. Click the Settin
 |                    Step 1                    |                    Step 2                    |                  Have fun!                   |
 | :------------------------------------------: | :------------------------------------------: | :------------------------------------------: |
 | ![Web UI](misc/screenshots/ollaya_ui_01.png) | ![Web UI](misc/screenshots/ollaya_ui_02.png) | ![Web UI](misc/screenshots/ollaya_ui_03.png) |
+
+## Automated Support Ticket Triage Example in Python
+
+This example demonstrates automated customer support triage using Ollaya’s decision API. The OllayaClient class sends incoming customer messages to the triage model, extracts structured signals such as intent, frustration, and urgency, and then routes the ticket to the correct department while escalating time sensitive issues in real time.
+
+```bash
+python3 examples/ollaya_client.py
+
+Analyzing: "Hi team, we have a major client presentation in 3 hours and our team dashboard is showing an unexpected 500 error when loading reports. Could someone please help us get this back up urgently? Thank you!"
+
+--- Ticket Routing Report ---
+Primary Intent : technical_help
+Frustration    : 0.99 / 3.0
+Routing Actions:
+  • ROUTE -> Priority set to HIGH / P1
+  • QUEUE -> Tier 2 Technical Support
+
+```
 
 ## License
 
