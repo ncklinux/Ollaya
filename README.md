@@ -206,12 +206,15 @@ Open your browser and navigate to `http://192.168.56.106:5173`. Click the Settin
 | :------------------------------------------: | :------------------------------------------: | :------------------------------------------: |
 | ![Web UI](misc/screenshots/ollaya_ui_01.png) | ![Web UI](misc/screenshots/ollaya_ui_02.png) | ![Web UI](misc/screenshots/ollaya_ui_03.png) |
 
-## Automated Support Ticket Triage Example in Python
+## Automated Support Ticket Triage Example
 
 This example demonstrates automated customer support triage using Ollaya’s decision API. The OllayaClient class sends incoming customer messages to the triage model, extracts structured signals such as intent, frustration, and urgency, and then routes the ticket to the correct department while escalating time sensitive issues in real time.
 
+### Python
+
 ```bash
-python3 examples/ollaya_client.py
+cd examples
+python3 ollaya_client.py
 
 Analyzing: "Hi team, we have a major client presentation in 3 hours and our team dashboard is showing an unexpected 500 error when loading reports. Could someone please help us get this back up urgently? Thank you!"
 
@@ -222,6 +225,57 @@ Routing Actions:
   • ROUTE -> Priority set to HIGH / P1
   • QUEUE -> Tier 2 Technical Support
 
+```
+
+### Shell Script
+
+```bash
+cd examples
+chmod +x ollaya_client.sh
+./ollaya_client.sh
+
+Analyzing: "Hi team, we have a major client presentation in 3 hours and our team dashboard is showing an unexpected 500 error when loading reports. Could someone please help us get this back up urgently? Thank you!"
+
+--- Ticket Routing Report ---
+Primary Intent : technical_help
+Frustration    : 0.99 / 3.0
+Routing Actions:
+  • ROUTE -> Priority set to HIGH / P1
+  • QUEUE -> Tier 2 Technical Support
+```
+
+# Rust
+
+```bash
+sudo apt update
+sudo apt install -y curl build-essential pkg-config libssl-dev
+curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh -s -- -y
+source "$HOME/.cargo/env"
+cargo --version
+rustc --version
+cd examples/rust
+cargo run
+
+    Updating crates.io index
+     Locking 156 packages to highest compatible versions
+      Adding reqwest v0.12.28 (available: v0.13.5)
+  Downloaded atomic-waker v1.1.2
+  Downloaded futures-io v0.3.34
+  ...
+   Compiling mime v0.3.18
+   Compiling base64 v0.22.1
+   Compiling reqwest v0.12.28
+   Compiling ollaya-client v0.1.0 (/home/test/examples/rust)
+    Finished `dev` profile [unoptimized + debuginfo] target(s) in 15.75s
+     Running `target/debug/ollaya-client`
+Analyzing: "Hi team, we have a major client presentation in 3 hours and our team dashboard is showing an unexpected 500 error when loading reports. Could someone please help us get this back up urgently? Thank you!"
+
+--- Ticket Routing Report ---
+Primary Intent : technical_help
+Frustration    : 0.99 / 3.0
+Routing Actions:
+  • ROUTE -> Priority set to HIGH / P1
+  • QUEUE -> Tier 2 Technical Support
 ```
 
 ## License
