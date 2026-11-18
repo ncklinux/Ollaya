@@ -1,6 +1,6 @@
 # Ollaya
 
-A hands-on tutorial for Ollaya showing how to run fast, local decision models for instant classification, routing, and guardrails
+A hands-on walkthrough of Ollaya showing how to run fast, local decision models for instant classification, routing, and guardrails
 
 <picture>
   <source media="(prefers-color-scheme: dark)" srcset="misc/logo/logo-light.png">
